@@ -1,0 +1,254 @@
+{
+  "entities": {
+    "Worker": {
+      "title": "Worker",
+      "description": "Construction worker master entity",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "complete_name": { "type": "string" },
+        "completeName": { "type": "string" },
+        "age": { "type": "number" },
+        "contact_number": { "type": "string" },
+        "contactNumber": { "type": "string" },
+        "trade": { "type": "string" },
+        "employment_type": { "type": "string" },
+        "employmentType": { "type": "string" },
+        "daily_wage_rate": { "type": "number" },
+        "dailyWageRate": { "type": "number" },
+        "employment_status": { "type": "string" },
+        "employmentStatus": { "type": "string" },
+        "date_hired": { "type": "string" },
+        "dateHired": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "trade", "daily_wage_rate"]
+    },
+    "Attendance": {
+      "title": "Attendance",
+      "description": "Daily attendance record for a worker",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "worker_id": { "type": "string" },
+        "workerId": { "type": "string" },
+        "date": { "type": "string" },
+        "time_in": { "type": "string" },
+        "timeIn": { "type": "string" },
+        "time_out": { "type": "string" },
+        "timeOut": { "type": "string" },
+        "attendance_status": { "type": "string" },
+        "attendanceStatus": { "type": "string" },
+        "total_hours_worked": { "type": "number" },
+        "totalHoursWorked": { "type": "number" },
+        "overtime_hours": { "type": "number" },
+        "overtimeHours": { "type": "number" },
+        "regular_hours": { "type": "number" },
+        "regularHours": { "type": "number" },
+        "calculated_pay": { "type": "number" },
+        "calculatedPay": { "type": "number" },
+        "remarks": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "worker_id", "date", "attendance_status"]
+    },
+    "LaborAssignment": {
+      "title": "LaborAssignment",
+      "description": "Daily labor assignment of worker to activity",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "worker_id": { "type": "string" },
+        "workerId": { "type": "string" },
+        "activity_id": { "type": "string" },
+        "activityId": { "type": "string" },
+        "work_area_id": { "type": "string" },
+        "workAreaId": { "type": "string" },
+        "supervisor_id": { "type": "string" },
+        "supervisorId": { "type": "string" },
+        "assignment_status": { "type": "string" },
+        "assignmentStatus": { "type": "string" },
+        "notes": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "date", "worker_id", "activity_id", "work_area_id", "supervisor_id"]
+    },
+    "WorkActivity": {
+      "title": "WorkActivity",
+      "description": "Catalog of construction activity",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "activity_name": { "type": "string" },
+        "activityName": { "type": "string" },
+        "description_of_work": { "type": "string" },
+        "descriptionOfWork": { "type": "string" },
+        "unit_of_measurement": { "type": "string" },
+        "unitOfMeasurement": { "type": "string" },
+        "target_productivity_rate": { "type": "number" },
+        "targetProductivityRate": { "type": "number" },
+        "activity_status": { "type": "string" },
+        "activityStatus": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "activity_name", "unit_of_measurement", "target_productivity_rate"]
+    },
+    "DailyAccomplishment": {
+      "title": "DailyAccomplishment",
+      "description": "Daily physical work accomplishment record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "activity_id": { "type": "string" },
+        "activityId": { "type": "string" },
+        "work_area_id": { "type": "string" },
+        "workAreaId": { "type": "string" },
+        "planned_quantity": { "type": "number" },
+        "plannedQuantity": { "type": "number" },
+        "actual_quantity": { "type": "number" },
+        "actualQuantity": { "type": "number" },
+        "unit_of_measurement": { "type": "string" },
+        "unitOfMeasurement": { "type": "string" },
+        "actual_labor_hours": { "type": "number" },
+        "actualLaborHours": { "type": "number" },
+        "actual_productivity_rate": { "type": "number" },
+        "actualProductivityRate": { "type": "number" },
+        "productivity_achievement_percent": { "type": "number" },
+        "productivityAchievementPercent": { "type": "number" },
+        "planned_achievement_percent": { "type": "number" },
+        "plannedAchievementPercent": { "type": "number" },
+        "performance_status": { "type": "string" },
+        "performanceStatus": { "type": "string" },
+        "remarks": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "date", "activity_id", "work_area_id", "actual_quantity", "actual_labor_hours"]
+    },
+    "Supervisor": {
+      "title": "Supervisor",
+      "description": "Jobsite supervisor record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "full_name": { "type": "string" },
+        "fullName": { "type": "string" },
+        "contact_number": { "type": "string" },
+        "contactNumber": { "type": "string" },
+        "email": { "type": "string" },
+        "role_title": { "type": "string" },
+        "roleTitle": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "full_name", "role_title"]
+    },
+    "WorkArea": {
+      "title": "WorkArea",
+      "description": "Jobsite project location or work area",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "area_name": { "type": "string" },
+        "areaName": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "area_name"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Application user account and profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "fullName": { "type": "string" },
+        "role": { "type": "string" },
+        "accountStatus": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "lastLoginAt": { "type": "string" }
+      },
+      "required": ["id", "email", "role"]
+    },
+    "SystemSettings": {
+      "title": "SystemSettings",
+      "description": "Global construction LMS payroll and shift settings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "standard_daily_hours": { "type": "number" },
+        "normal_shift_start_time": { "type": "string" },
+        "unpaid_break_duration_minutes": { "type": "number" },
+        "overtime_multiplier": { "type": "number" },
+        "half_day_threshold_hours": { "type": "number" },
+        "currency_symbol": { "type": "string" },
+        "company_name": { "type": "string" },
+        "project_name": { "type": "string" },
+        "sample_period_start": { "type": "string" },
+        "sample_period_end": { "type": "string" }
+      },
+      "required": ["id", "standard_daily_hours"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "System event audit log record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "user_email": { "type": "string" },
+        "action": { "type": "string" },
+        "module": { "type": "string" },
+        "record_id": { "type": "string" },
+        "change_summary": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "action", "module", "created_at"]
+    }
+  },
+  "firestore": {
+    "/workers/{workerId}": {
+      "schema": { "$ref": "#/entities/Worker" },
+      "description": "Worker master records catalog"
+    },
+    "/attendance/{attendanceId}": {
+      "schema": { "$ref": "#/entities/Attendance" },
+      "description": "Daily attendance clock-in and clock-out logs"
+    },
+    "/daily_labor_assignments/{assignmentId}": {
+      "schema": { "$ref": "#/entities/LaborAssignment" },
+      "description": "Worker labor assignments to activities and project areas"
+    },
+    "/work_activities/{activityId}": {
+      "schema": { "$ref": "#/entities/WorkActivity" },
+      "description": "Catalog of construction work activities and target productivity rates"
+    },
+    "/daily_accomplishments/{accomplishmentId}": {
+      "schema": { "$ref": "#/entities/DailyAccomplishment" },
+      "description": "Daily accomplishment records and productivity statistics"
+    },
+    "/supervisors/{supervisorId}": {
+      "schema": { "$ref": "#/entities/Supervisor" },
+      "description": "Project supervisors directory"
+    },
+    "/work_areas/{areaId}": {
+      "schema": { "$ref": "#/entities/WorkArea" },
+      "description": "Project location zones and work areas"
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profiles and account status"
+    },
+    "/system_settings/{settingId}": {
+      "schema": { "$ref": "#/entities/SystemSettings" },
+      "description": "Global application shift and payroll configuration"
+    },
+    "/audit_logs/{logId}": {
+      "schema": { "$ref": "#/entities/AuditLog" },
+      "description": "Tamper-evident audit trail of system operations"
+    }
+  }
+}

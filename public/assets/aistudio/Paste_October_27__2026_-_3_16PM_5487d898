@@ -1,0 +1,670 @@
+# IMPLEMENT AND CONNECT MY CONSTRUCTION LABOR MANAGEMENT SYSTEM TO FIREBASE SQL CONNECT
+
+## PRIMARY OBJECTIVE
+
+Modify and complete my existing Construction Labor Management System (LMS) in Google AI Studio Build mode.
+
+**The highest priority is to establish a real, working connection to Firebase SQL Connect backed by Cloud SQL for PostgreSQL.** All operational data, user profiles, permissions, attendance records, assignments, accomplishments, labor costs, and audit logs must persist in the database.
+
+Do not create another static prototype. Do not use mock data as the permanent data source. Do not claim the database is connected until actual database operations have been tested successfully.
+
+Preserve existing working functionality, improve incomplete modules, and maintain the project's professional design. Inspect the current project before editing its files.
+
+---
+
+## 1. REQUIRED TECHNOLOGY STACK
+
+Use the following architecture:
+
+- Frontend: React with TypeScript.
+- Application environment: Google AI Studio Build mode, using its full-stack application runtime.
+- Relational database: Firebase SQL Connect backed by Cloud SQL for PostgreSQL.
+- Authentication: Firebase Authentication with email and password.
+- Database access: Firebase SQL Connect's schema, GraphQL queries and mutations, and generated SDK.
+- Server-side operations: Node.js for authorized operations that require privileged account administration.
+- Charts: A suitable interactive chart library.
+- Styling: Responsive, professional construction-management interface.
+
+### Critical database restriction
+
+Use **Firebase SQL Connect and PostgreSQL**, not Cloud Firestore, Realtime Database, Supabase, SQLite, or localStorage as the primary database.
+
+Do not substitute another database technology if the requested connection cannot immediately be established.
+
+Use the supported Firebase SQL Connect implementation, including its schema files, connector operations, SDK generation, authentication integration, and authorization directives.
+
+Use the Firebase CLI and required Firebase Agent Skills when the available development environment supports them. Follow the official setup and deployment workflow.
+
+If Google AI Studio cannot perform a required Firebase CLI operation directly, generate the necessary files and provide the precise command and setup instructions. Clearly identify the remaining action that requires my Firebase project authorization or configuration.
+
+Do not silently replace an unavailable integration with a simulated database.
+
+## 2. CONNECT TO THE REAL FIREBASE SQL DATABASE
+
+First inspect the current source code and determine whether a Firebase project, SQL Connect service, PostgreSQL instance, schema, or generated SDK already exists.
+
+If any are present, reuse and validate them rather than creating unnecessary duplicate resources.
+
+If they do not exist, prepare the application for Firebase SQL Connect initialization and deployment.
+
+### Required setup and integration
+
+1. Identify the Firebase project to use.
+2. Initialize Firebase SQL Connect if it has not already been configured.
+3. Create or connect the SQL Connect service and its Cloud SQL for PostgreSQL database.
+4. Define the relational database schema.
+5. Define the required queries and mutations.
+6. Configure Firebase Authentication and authorization.
+7. Generate the appropriate typed client SDK.
+8. Connect every application module to its corresponding database operation.
+9. Configure environment variables and required secrets safely.
+10. Deploy the SQL Connect configuration using the supported Firebase CLI workflow.
+11. Test database operations against the actual configured database.
+
+Use the existing Firebase project when one is already associated with this application. Do not create duplicate projects or databases without checking first.
+
+Use the official SQL Connect project files and conventions, including the `dataconnect/` configuration and schema files where applicable.
+
+### Required data operations
+
+Implement and verify real database operations for:
+
+- Reading records.
+- Creating records.
+- Updating records.
+- Deleting records when authorized and permitted by data-integrity rules.
+- Searching and filtering records.
+- Joining or relating records through valid database relationships.
+- Retrieving dashboard summaries and reports.
+- Persisting and retrieving user permissions.
+- Recording audit events.
+
+Every form submission must execute the appropriate database mutation and display the actual result.
+
+After a successful mutation, refresh the affected data and dashboard calculations from the database.
+
+If a request fails, show a helpful error message. Do not display false success messages or silently insert fallback records into the interface.
+
+### Connection verification
+
+Create a database connection status indicator for administrators.
+
+It must reflect the actual connection state, not a hardcoded green status.
+
+When practical, verify connectivity through a harmless database query and show an appropriate status, such as:
+
+- Connected.
+- Connection unavailable.
+- Configuration incomplete.
+
+Never expose database passwords, service credentials, privileged API keys, or raw connection strings in the browser.
+
+## 3. FIREBASE AUTHENTICATION AND LOGIN PAGE
+
+Create or improve the LMS login page using Firebase Authentication with email and password.
+
+Include:
+
+- Application name and branding.
+- Email address input.
+- Password input.
+- Show/hide password control.
+- Sign-in button.
+- Required-field validation.
+- Invalid-credentials handling.
+- Forgot-password and password-reset functionality.
+- Loading and error states.
+- Secure sign-out.
+- Session handling.
+- Redirect to the appropriate dashboard after successful authentication.
+
+Do not implement authentication using hardcoded credentials, frontend-only checks, or a manually entered role field.
+
+Firebase Authentication must establish the identity of the user. The authenticated Firebase UID must be associated with a profile record in PostgreSQL.
+
+A user must not obtain access simply by typing “Admin” into a form or modifying frontend code.
+
+Only authorized, provisioned accounts may enter protected modules.
+
+## 4. ADMIN ACCOUNT AND USER CONTROL PANEL
+
+Implement two roles: **Admin** and **User**.
+
+### Admin capabilities
+
+The Admin must have access to the administrator dashboard and a functional User Management / Control Panel.
+
+The Admin must be able to:
+
+- Create standard user accounts.
+- View all registered users.
+- Edit user profile details.
+- Assign or update authorized roles.
+- Activate or deactivate accounts.
+- Initiate password resets.
+- View and configure module-level permissions.
+- Grant view-only permissions.
+- Grant create, edit, and delete permissions separately.
+- Review audit logs.
+- Access authorized reports and system settings.
+
+User creation must create the appropriate Firebase Authentication account and associated PostgreSQL profile. These operations must be coordinated and handle failures safely, including preventing or detecting orphaned accounts and duplicate profiles.
+
+Use a trusted server-side Firebase Admin SDK operation or another supported secure provisioning mechanism for privileged account creation. Never place service-account credentials or privileged secrets in frontend code.
+
+Prevent standard users from creating administrator accounts or changing their own roles and permissions.
+
+### User profile fields
+
+Store the following in the relational database:
+
+- Internal profile ID.
+- Firebase Authentication UID.
+- Complete name.
+- Email.
+- Role.
+- Account status.
+- Creation timestamp.
+- Last login information, where available.
+- Assigned module permissions.
+
+Enforce unique profile identifiers and appropriate account relationships.
+
+### User capabilities
+
+Standard Users may perform operations permitted by their module permissions.
+
+They must not access User Management, privileged system settings, or other restricted areas without explicit authorization.
+
+A disabled or unauthorized account must not be allowed to continue accessing protected data through direct API requests.
+
+## 5. MODULE-LEVEL ACCESS CONTROL
+
+Create a database-backed permissions system.
+
+For every module, support these permission types where applicable:
+
+- View.
+- Create.
+- Edit.
+- Delete.
+
+Include permissions for:
+
+1. Dashboard.
+2. Worker Master Data.
+3. Attendance Management.
+4. Daily Labor Assignment.
+5. Work Activity Master Data.
+6. Daily Accomplishment Records.
+7. Reports and Analytics.
+8. User Management.
+9. Audit Log.
+10. System Settings.
+
+The Admin must be able to grant individual Users access to selected modules without giving them access to every module.
+
+For example, a User may receive view-only access to Worker Master Data and Attendance Management while being allowed to create and edit Daily Accomplishment Records.
+
+### Authorization requirements
+
+Enforce permissions at the database-operation and trusted server layers, not just by hiding sidebar items.
+
+Use Firebase SQL Connect's documented `@auth` authorization directives and supported authorization expressions and checks as appropriate. Where decisions depend on permission records stored in PostgreSQL, implement the necessary database-backed authorization checks using supported SQL Connect features or a trusted backend.
+
+Every client-accessible query and mutation must have an explicit, appropriate authorization policy.
+
+Follow least-privilege principles:
+
+- Do not expose unrestricted write operations.
+- Do not leave sensitive operations publicly accessible.
+- Do not trust a user ID or role supplied in an unverified request.
+- Do not allow self-promotion to Admin.
+- Do not permit unauthorized access by guessing record IDs or calling APIs directly.
+
+The permissions configured by the Admin must affect actual data access and write operations.
+
+## 6. REQUIRED LABOR MANAGEMENT MODULES
+
+Implement and connect all the following modules to the SQL database.
+
+### A. Worker Master Data
+
+Each worker must have:
+
+- Worker ID.
+- Complete name.
+- Age.
+- Contact number.
+- Trade or specialization.
+- Employment type.
+- Daily wage rate.
+- Employment status.
+- Date hired.
+
+Support the trades Mason, Carpenter, Electrician, Plumber, General Laborer, Welder, Steel Worker, Painter, Tile Setter, Heavy Equipment Operator, and other configurable trades.
+
+Employment types: Regular, Contractual, and Daily Wage.
+
+Employment statuses: Active and Inactive.
+
+Implement add, view, edit, search, filter, and authorized delete or archival functionality.
+
+Use unique worker IDs and validate required fields and wage rates.
+
+Create at least **15 demonstration worker records** with varied trades.
+
+### B. Attendance Management
+
+Each attendance record must include:
+
+- Attendance ID.
+- Worker ID.
+- Date.
+- Time In.
+- Time Out.
+- Attendance Status.
+- Total Hours Worked.
+- Overtime Hours.
+
+Supported statuses: Present, Absent, Late, and Half-Day.
+
+Calculate elapsed working hours automatically, less applicable unpaid breaks.
+
+Use configurable standard working hours, unpaid breaks, shift start time, and overtime rules.
+
+Calculate overtime only when the configured threshold is exceeded.
+
+Handle absent workers without requiring time-in and time-out values.
+
+Prevent duplicate worker attendance for the same date unless a documented shift-based design requires otherwise.
+
+Create at least **75 real attendance records**, covering 15 workers over five working days.
+
+### C. Daily Labor Assignment
+
+Each assignment must contain:
+
+- Assignment ID.
+- Date.
+- Worker reference.
+- Work activity reference.
+- Project location or work area.
+- Assigned supervisor.
+- Assignment status.
+
+Supported statuses: Assigned, In Progress, Completed.
+
+Allow authorized users to create, view, edit, filter, and manage assignments.
+
+Use valid database references for workers, activities, work areas, and supervisors.
+
+Create at least **75 assignment records** for the same 15 workers and five working days.
+
+### D. Work Activity Master Data
+
+Each activity must contain:
+
+- Activity ID.
+- Activity name.
+- Work description.
+- Unit of measurement.
+- Target productivity rate.
+- Activity status.
+
+Provide at least **10 unique construction activities**, such as Excavation, Reinforcement Steel Installation, Formwork Installation, Concrete Pouring, Masonry, Plastering, Electrical Conduit Installation, Plumbing Pipe Installation, Tile Installation, and Painting.
+
+Use units appropriate to the work, including m², m³, linear meters, and pieces.
+
+Productivity targets must represent output per labor-hour. Use labeled demonstration targets that administrators can modify.
+
+### E. Daily Accomplishment Records
+
+Each record must contain:
+
+- Accomplishment ID.
+- Date.
+- Activity ID.
+- Assigned worker or work team.
+- Work area.
+- Planned quantity.
+- Actual accomplished quantity.
+- Unit of measurement.
+- Actual labor hours.
+- Productivity rate.
+- Remarks.
+
+Link accomplishments to their activity, work area, and relevant labor assignments or participating workers.
+
+Use a junction table or equivalent relational structure when a team performs one accomplishment together.
+
+Calculate:
+
+Actual Productivity = Actual Accomplished Quantity ÷ Actual Labor Hours
+
+Productivity Achievement (%) = Actual Productivity ÷ Target Productivity × 100
+
+Planned Quantity Achievement (%) = Actual Accomplished Quantity ÷ Planned Quantity × 100
+
+Prevent division by zero. Show missing or invalid results as unavailable.
+
+Flag activities as Below Target when their actual productivity is lower than the configured target.
+
+Seed accomplishment records across all five working days.
+
+## 7. DATABASE SCHEMA AND RELATIONSHIPS
+
+Create a normalized PostgreSQL database using Firebase SQL Connect.
+
+Implement tables or equivalent relational structures for:
+
+- UserProfiles.
+- UserModulePermissions.
+- Workers.
+- Supervisors.
+- WorkAreas.
+- WorkActivities.
+- Attendance.
+- DailyLaborAssignments.
+- DailyAccomplishments.
+- AccomplishmentParticipants.
+- SystemSettings.
+- AuditLogs.
+
+Use appropriate primary keys, foreign keys, unique constraints, validation constraints, and indexes.
+
+Link related records through actual foreign-key relationships.
+
+Examples:
+
+- A worker can have many attendance records.
+- A worker can have many daily labor assignments.
+- A work activity can be used in many assignments and accomplishment records.
+- An assignment references a valid worker, activity, supervisor, and work area.
+- Accomplishment records can reference multiple participating assignments through a junction table.
+- A user profile is associated with a Firebase Authentication UID.
+- A user profile has module permissions.
+- Audit events reference the acting user where available.
+
+Prevent invalid references and duplicate records.
+
+Protect historical information from accidental deletion. Prefer deactivation or archival for master records that are referenced by historical transactions.
+
+Store wage rates, hours, quantities, and monetary values using appropriate numeric types. Store dates and timestamps consistently.
+
+All application modules must use the same database records. Do not maintain separate independent arrays for workers, attendance, assignments, or accomplishments.
+
+## 8. AUTOMATED DASHBOARD CALCULATIONS
+
+Implement all six mandatory dashboard sections.
+
+### A. Today's Workforce
+
+Display scheduled workers, present workers, absent workers, and late workers for a selected date.
+
+Calculate scheduled workforce from daily assignments and attendance statistics from valid attendance records.
+
+### B. Labor Hours
+
+Display total hours worked for the selected day, overtime hours, and the total labor-hours for the five-day demonstration period.
+
+Avoid duplicate counts and incomplete-shift calculations.
+
+### C. Labor Cost
+
+Display daily labor cost, month-to-date labor cost, cost by worker, and cost by trade.
+
+Use the recorded attendance, worker wage rates, and configured work-hour and overtime rules.
+
+For a configurable demonstration model:
+
+Hourly Rate = Daily Wage Rate ÷ Standard Paid Hours per Day
+
+Regular Pay = Regular Hours × Hourly Rate
+
+Overtime Pay = Overtime Hours × Hourly Rate × Configured Overtime Multiplier
+
+Total Labor Cost = Regular Pay + Overtime Pay
+
+Use the same rules in the dashboard, reports, and exported totals. Do not count a worker's attendance multiple times simply because that worker has multiple assignments.
+
+Clearly label configured payroll assumptions. Do not represent sample overtime multipliers or payroll rules as universal legal requirements.
+
+### D. Workforce by Trade
+
+Display worker counts per specialization using an interactive pie chart or bar chart, preferably both.
+
+Use actual database data.
+
+### E. Manpower Status
+
+Display active and inactive workers, assigned and unassigned workers, and present, absent, and late attendance counts.
+
+Distinguish missing records from confirmed unassigned status.
+
+### F. Productivity per Activity
+
+Display planned versus actual quantities, productivity per activity, target-versus-actual productivity, achievement percentages, and activities performing below target.
+
+Allow users to filter by date, activity, work area, and supervisor where applicable.
+
+All dashboard statistics, charts, and totals must be calculated from actual PostgreSQL-backed records.
+
+## 9. AUDIT LOG
+
+Implement an audit log stored in the relational database.
+
+Record significant operations, including:
+
+- User login and logout events where available.
+- Failed login attempts where supported.
+- Creation and modification of records.
+- Deletion or archival of records.
+- Changes to employee wage rates.
+- Changes to productivity targets.
+- Changes to user roles and module permissions.
+- Changes to payroll and work-hour settings.
+
+Each audit record should contain:
+
+- Audit ID.
+- Acting user ID, where available.
+- Action.
+- Affected module.
+- Affected record ID.
+- Timestamp.
+- Change summary.
+- Relevant before-and-after values where appropriate.
+
+Generate audit events through trusted operations wherever possible.
+
+Protect audit records from unauthorized modification and deletion. Standard Users must not be able to rewrite their own audit history.
+
+## 10. SYSTEM INTERFACE AND USABILITY
+
+Maintain a professional construction-management appearance using navy blue, white, light gray, and restrained safety-orange accents.
+
+Provide:
+
+- Responsive layout.
+- Sidebar navigation.
+- Admin and User dashboards.
+- Searchable data tables.
+- Sorting and pagination.
+- Date and status filters.
+- Validated entry forms.
+- Loading indicators.
+- Confirmation dialogs.
+- Success and error notifications.
+- Clear empty states.
+- Accessible status labels.
+- Working navigation and action buttons.
+
+Display only the modules the authenticated User is permitted to access.
+
+Ensure that the interface refreshes after successful database operations and that all displayed values agree with the persisted data.
+
+## 11. DEMONSTRATION DATA AND INITIAL SETUP
+
+Seed the configured database with coherent demonstration data:
+
+- At least 15 workers.
+- At least 75 attendance records.
+- At least 75 labor assignments.
+- At least 10 work activities.
+- Accomplishment records covering five working days.
+- Associated supervisors and work areas.
+
+Use the same five-day period for the attendance and assignment requirements.
+
+Include varied attendance statuses, overtime, work activities, quantities, and productivity results so all dashboard features can be demonstrated.
+
+Make the seeding process idempotent. Re-running it must not create duplicate records.
+
+Store the demonstration data in the actual SQL Connect database.
+
+Do not seed production with hardcoded administrator passwords or unrestricted demo accounts.
+
+Provide a secure initial administrator provisioning process and a standard User account creation process. If account setup requires action in the Firebase Console, document it clearly.
+
+## 12. IMPLEMENTATION FILES AND CONFIGURATION
+
+Inspect the existing project before modifying files.
+
+Create or update the necessary SQL Connect schema, operations, generated SDK, React components, service modules, and backend endpoints.
+
+Use the project's supported Firebase SQL Connect directory and configuration conventions.
+
+Separate database operations from UI components so the application is maintainable.
+
+Use typed interfaces and generated SDK functions wherever appropriate.
+
+Do not leave unused mock services connected to operational pages.
+
+If the application currently uses Firestore or another database, identify the existing integration and migrate the relevant data-access logic to SQL Connect. Preserve existing data when feasible and avoid destructive migrations without a verified backup and migration plan.
+
+Do not expose privileged credentials in frontend environment variables.
+
+Do not leave database operations unimplemented behind placeholder functions.
+
+## 13. TESTING AND VALIDATION — REQUIRED BEFORE COMPLETION
+
+Run the available build, type-checking, and test commands.
+
+Then execute actual integration tests against the configured SQL Connect backend.
+
+### Authentication tests
+
+- Admin can sign in.
+- User can sign in.
+- Invalid credentials are rejected.
+- Sign-out works.
+- Unauthorized users cannot open restricted modules.
+- A standard User cannot promote themselves to Admin.
+- Admin can create a standard User.
+- Deactivated accounts cannot continue to access protected functions.
+
+### Database tests
+
+- Create a worker and retrieve it from PostgreSQL.
+- Edit the worker and verify the updated value.
+- Verify the record persists after page refresh.
+- Create attendance and verify saved time and calculated hours.
+- Create an assignment and verify its foreign-key relationships.
+- Create an accomplishment and verify its database references.
+- Verify search and filtering use persisted records.
+- Verify permissions affect actual read and write operations.
+- Verify audit records are created for relevant changes.
+
+### Calculation tests
+
+Use known inputs and expected outputs to validate:
+
+- Hours worked after unpaid breaks.
+- Overtime calculations.
+- Daily and month-to-date labor costs.
+- Cost by worker and trade.
+- Daily and five-day labor-hours totals.
+- Actual productivity.
+- Planned quantity achievement.
+- Target productivity achievement.
+- Below-target activity classification.
+
+Fix discrepancies before declaring the feature complete.
+
+### Minimum record-count tests
+
+Verify the actual database contains at least:
+
+- 15 workers.
+- 75 attendance records across five working days.
+- 75 assignments across those same five days.
+- 10 unique activities.
+- Accomplishment records covering all five working days.
+
+Do not count mock records or values generated only for the dashboard.
+
+### Final validation
+
+Confirm:
+
+- The application builds without unresolved errors.
+- SQL Connect schema and connector operations compile.
+- The generated SDK is current.
+- Database queries and mutations succeed.
+- Forms save and retrieve real data.
+- Dashboard values agree with source records.
+- Permission restrictions work at the actual data-access layer.
+- Critical authorization failures and database errors are handled properly.
+- There are no nonfunctional placeholder buttons or fake connection statuses.
+
+Do not report any test as successful unless it has actually been executed.
+
+## 14. DEPLOYMENT AND CONNECTION HANDOFF
+
+Deploy the database configuration using the supported Firebase SQL Connect workflow when authorized and possible.
+
+Use the appropriate Firebase CLI initialization and deployment commands. For the current SQL Connect workflow, the CLI uses the `dataconnect` service identifier.
+
+If external setup is required, provide the exact actions and commands, including:
+
+- Firebase project selection.
+- Required Firebase CLI setup.
+- SQL Connect initialization.
+- Cloud SQL provisioning and any required billing configuration.
+- Authentication provider configuration.
+- SDK generation.
+- SQL Connect deployment.
+- Application environment setup.
+- Administrator account provisioning.
+
+Do not invent project IDs, deployed URLs, database credentials, or successful deployment results.
+
+Keep the distinction clear between code that has been generated, services that have been configured, and operations that have actually been tested.
+
+## 15. FINAL COMPLETION REPORT
+
+After implementing and testing the system, provide a concise report containing:
+
+1. Firebase project connected.
+2. Firebase SQL Connect configuration status.
+3. Cloud SQL for PostgreSQL connection status.
+4. Database tables and relationships created.
+5. Authentication configuration status.
+6. Admin and User account provisioning status.
+7. Module permission and audit-log implementation status.
+8. Required demonstration-record counts verified.
+9. Integration tests executed and their actual results.
+10. Remaining blockers or required manual setup.
+11. Exact commands needed for outstanding deployment steps.
+12. Actual application URL if deployment succeeded.
+
+### Final instruction
+
+**Prioritize a real Firebase SQL Connect connection over merely generating attractive frontend pages.**
+
+Use Firebase SQL Connect with Cloud SQL for PostgreSQL, Firebase Authentication, a protected Admin/User permission system, and a persistent relational schema.
+
+Build, configure, deploy where authorized, execute real database operations, and validate the core workflows.
+
+If a required service or external permission is unavailable, identify the specific issue and provide the exact resolution steps. Never pretend the application is connected or functional when its database, authentication, permissions, or required tests have not been verified.

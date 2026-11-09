@@ -1,0 +1,6 @@
+{
+  "name": "BuildPulse LMS - Construction Labor Management System",
+  "description": "Enterprise-grade Construction Labor Management System featuring real relational database persistence, role-based user management, attendance tracking, daily labor assignments, activity accomplishments, automated payroll and productivity analytics, audit logging, and academic submission documentation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

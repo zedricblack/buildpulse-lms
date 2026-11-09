@@ -1,0 +1,1023 @@
+# MASTER PROMPT: CONSTRUCTION LABOR MANAGEMENT SYSTEM (LMS)
+
+## 1. PROJECT OBJECTIVE
+
+Build a complete, functional, database-driven **Construction Labor Management System (LMS)** for managing the workforce and monitoring labor performance on a construction project.
+
+The system must demonstrate how a construction company manages construction workers, records daily attendance, assigns workers to construction activities, monitors daily accomplishments, calculates labor costs, and evaluates workforce productivity.
+
+This application is being developed to satisfy an academic project with specific database and system requirements. Therefore, prioritize completeness, accurate calculations, properly linked database tables, functional forms, ease of use, professional presentation, and reliable data persistence.
+
+Do not produce only a UI prototype, dashboard mockup, or static demonstration. Build a working full-stack application with real authentication, persistent database storage, create/read/update/delete operations where permitted, automated calculations, reports, and data validation.
+
+Implement the system in Google AI Studio Build mode and follow the existing project structure if a codebase has already been generated. Preserve working functionality when modifying or extending the application.
+
+## 2. TECHNOLOGY AND DATABASE REQUIREMENTS
+
+Use the following architecture:
+
+- Frontend: React with TypeScript.
+- Backend: Node.js server runtime.
+- Database: Supabase PostgreSQL, using a normalized relational schema, primary keys, foreign keys, constraints, and indexes.
+- Authentication: Supabase Auth using email and password.
+- Authorization: Role-based access control combined with module-level permissions.
+- Charts: A reliable charting library for interactive dashboard visualizations.
+- Styling: A modern, responsive UI with reusable components.
+- Reporting: Printable reports and downloadable CSV/PDF exports where applicable.
+
+Keep privileged operations, user provisioning, and sensitive credentials on the server side. Never expose a database service-role key, administrator password, or other private credentials in browser code.
+
+If the database credentials have not yet been configured, generate the complete database schema, migration scripts, environment-variable template, backend integration, and clear setup instructions. Clearly identify any external setup that remains necessary. Do not pretend that the database, authentication, or user accounts are connected until they have been configured and tested.
+
+Use actual database records as the source of truth. Do not use localStorage as a substitute for the required persistent database.
+
+## 3. USER INTERFACE AND DESIGN
+
+Create a professional construction management interface with a clean, organized, modern design.
+
+The interface should include:
+
+- A dedicated login page.
+- A role-appropriate dashboard.
+- A collapsible sidebar navigation.
+- A top navigation bar containing the current user's name, role, notifications if implemented, and account menu.
+- Data tables with search, sorting, filtering, pagination, and clear empty states.
+- Functional forms for adding and editing records.
+- Confirmation dialogs for destructive actions.
+- Validation messages and success/error notifications.
+- Loading indicators and useful error messages.
+- Responsive layouts for desktop, tablet, and mobile devices.
+- Consistent typography, spacing, colors, icons, and status indicators.
+
+Use a construction-management visual identity: professional navy blue, white, neutral gray, and restrained safety-orange accents.
+
+Avoid unnecessary decoration, crowded layouts, or excessive animations. Prioritize readability, usability, and an organized presentation suitable for an academic system demonstration.
+
+All visible buttons, forms, navigation items, filters, charts, and actions must work as intended.
+
+## 4. LOGIN PAGE AND AUTHENTICATION
+
+Create a complete login page for the Construction Labor Management System.
+
+### Login page features
+
+Include:
+
+- LMS name and application logo or text-based branding.
+- Email address field.
+- Password field.
+- Show/hide password control.
+- Sign-in button.
+- Required-field validation.
+- Invalid-credentials error handling.
+- Loading state during authentication.
+- Secure sign-out functionality.
+- Password reset or recovery flow.
+- Appropriate unauthorized-access messages.
+
+Authenticate users through the configured authentication provider. Do not authenticate users by simply checking a hardcoded username or password in the frontend.
+
+### Account types
+
+The application must support two primary roles:
+
+1. **Admin**
+2. **User**
+
+The role must be stored in a protected user profile or role-assignment record associated with the authenticated account.
+
+Do not trust a role value supplied or modified by the browser. Enforce access permissions on the server and through database authorization policies.
+
+### Initial account provisioning
+
+Provide a secure first-run setup process for establishing the initial administrator account.
+
+Also provide a secure method for creating a standard User account so that both roles can be tested.
+
+During development, support a server-side seed or provisioning procedure that accepts administrator and standard-user credentials through environment variables or another secure setup mechanism. Do not hardcode passwords into the application interface or public source code.
+
+Require the administrator to complete any applicable password-change or account-setup procedure. Once the initial administrator is configured, disable unrestricted first-run administrator creation.
+
+If the accounts have not yet been provisioned, clearly document the required setup rather than presenting nonexistent demo accounts as working accounts.
+
+## 5. ADMIN CONTROL PANEL AND USER MANAGEMENT
+
+Create an administrator-only **User Management / Control Panel**.
+
+The Admin must be able to:
+
+- View all registered users.
+- Create a new user.
+- Edit user profile information.
+- Assign or update a user's role when authorized.
+- Activate or deactivate user access.
+- Initiate password-reset procedures.
+- View a user's assigned module permissions.
+- Grant view-only access to selected modules.
+- Grant create, edit, and delete permissions separately where appropriate.
+- Review user activity and audit history.
+- Search, filter, and sort user records.
+
+Each user profile should include:
+
+- User ID.
+- Full name.
+- Email address.
+- Role.
+- Account status.
+- Assigned module permissions.
+- Date created.
+- Last login, where available.
+
+The User Control Panel must be a real administrative module backed by the database.
+
+### Permission management
+
+Provide configurable permissions for the following modules:
+
+- Dashboard.
+- Worker Master Data.
+- Attendance Management.
+- Daily Labor Assignment.
+- Work Activity Master Data.
+- Daily Accomplishment Records.
+- Reports and Analytics.
+- User Management.
+- Audit Log.
+- System Settings.
+
+Each module must support appropriate permission flags, such as:
+
+- View.
+- Create.
+- Edit.
+- Delete.
+
+An administrator must be able to grant view-only access to a module without allowing changes to its records.
+
+### Default permissions
+
+**Admin**
+
+- Full access to operational modules and reports.
+- Access to the User Management / Control Panel.
+- Ability to configure module permissions.
+- Access to audit logs and system settings.
+- Ability to manage the application's configuration.
+
+**User**
+
+- Access only to modules granted by the Admin.
+- Default access to authorized workforce, attendance, assignment, activity, accomplishment, and reporting functions.
+- No access to User Management or privileged system settings unless explicitly authorized.
+- No ability to promote themselves to Admin or change their own permissions.
+
+Apply permission checks both in the user interface and on the server/database layer. Hiding a navigation item alone is not sufficient security.
+
+Deactivate unauthorized accounts immediately and prevent them from accessing protected functions.
+
+## 6. WORKER MASTER DATA
+
+Create a complete Worker Master Data module for construction workers.
+
+### Required worker fields
+
+Each worker record must contain:
+
+1. Worker ID — unique identifier.
+2. Complete Name.
+3. Age.
+4. Contact Number.
+5. Trade/Specialization.
+6. Employment Type.
+7. Daily Wage Rate.
+8. Employment Status.
+9. Date Hired.
+
+### Supported trades
+
+Include appropriate construction trades, such as:
+
+- Mason.
+- Carpenter.
+- Electrician.
+- Plumber.
+- General Laborer.
+- Welder.
+- Steelman or Reinforcing Steel Worker.
+- Painter.
+- Tile Setter.
+- Heavy Equipment Operator.
+- Other configurable construction trades.
+
+### Employment types
+
+- Regular.
+- Contractual.
+- Daily Wage.
+
+### Employment status
+
+- Active.
+- Inactive.
+
+### Required functionality
+
+Provide forms to add, view, edit, and manage worker records.
+
+Include:
+
+- Automatic or validated unique worker IDs.
+- Search by worker ID or complete name.
+- Filtering by specialization, employment type, and employment status.
+- Sorting and pagination.
+- Input validation for age, contact information, and wage rate.
+- Prevention of duplicate worker IDs.
+- Protection against deleting workers who have linked attendance, assignment, or accomplishment records.
+- Deactivation of workers who should no longer receive new assignments.
+
+Create at least **15 sample construction workers** representing different trades.
+
+Seed these as clearly identified demonstration data. All seeded records must be editable, and the application must not duplicate them whenever a page reloads.
+
+## 7. ATTENDANCE MANAGEMENT
+
+Build a functional Attendance Management module that records the daily attendance of construction workers.
+
+### Required attendance fields
+
+1. Attendance ID.
+2. Worker ID.
+3. Date.
+4. Time In.
+5. Time Out.
+6. Attendance Status.
+7. Total Hours Worked.
+8. Overtime Hours, if applicable.
+
+### Supported attendance statuses
+
+- Present.
+- Absent.
+- Late.
+- Half-Day.
+
+### Required functionality
+
+- Record daily attendance.
+- Select an existing worker from Worker Master Data.
+- View attendance records by date.
+- Search and filter by worker, date, trade, and attendance status.
+- Create and edit attendance entries.
+- Automatically calculate hours worked.
+- Calculate overtime hours using configurable work-hour rules.
+- Prevent duplicate attendance entries for the same worker and date unless a properly designed shift-based exception is implemented.
+- Support reporting by day and across a selected five-day period.
+
+### Automated calculation rules
+
+Calculate elapsed shift time using Time In and Time Out.
+
+Subtract the configured unpaid break duration where applicable:
+
+Total Hours Worked = Elapsed Shift Hours − Applicable Unpaid Break Hours
+
+Overtime Hours = Maximum of 0 and (Total Hours Worked − Configured Standard Daily Hours)
+
+Make the standard working hours, break rules, and overtime threshold configurable through system settings.
+
+Validate missing or invalid time entries. Handle overnight shifts correctly if supported; otherwise reject invalid time ranges with a clear explanation.
+
+For absent workers, permit an absence record without requiring Time In and Time Out. Display zero actual hours unless a valid attendance record establishes otherwise.
+
+Late attendance should be determined using the configured standard start time or an authorized manual override with a recorded reason. Half-Day attendance must be supported through consistent configured thresholds or an authorized manual selection.
+
+Do not silently deduct wages for lateness or absence. Any additional deduction policy must be explicitly configured and authorized.
+
+### Required minimum
+
+Create at least **75 attendance records**, covering all 15 workers over five working days.
+
+Every worker must have one attendance record for each of the five sample working dates.
+
+Seed the sample data only once and display the attendance dates clearly.
+
+## 8. DAILY LABOR ASSIGNMENT
+
+Build a Daily Labor Assignment module for assigning construction workers to specific activities.
+
+### Required assignment fields
+
+1. Assignment ID.
+2. Date.
+3. Worker ID.
+4. Assigned Activity.
+5. Project Location / Work Area.
+6. Assigned Supervisor.
+7. Assignment Status.
+
+### Assignment status
+
+- Assigned.
+- In Progress.
+- Completed.
+
+### Required functionality
+
+- Assign a worker to an activity on a selected date.
+- Select workers from Worker Master Data.
+- Select activities from Work Activity Master Data.
+- Record work area or project location.
+- Assign a supervisor.
+- Update assignment status.
+- View assignments by date, worker, activity, supervisor, or work area.
+- Filter and search assignment records.
+- Prevent assignments to inactive workers unless an authorized exception is recorded.
+- Validate activity and worker references against existing database records.
+
+Design the system so that each assignment is linked to a real worker and a valid work activity, rather than storing unrelated text values that cannot be tracked.
+
+### Required minimum
+
+Create at least **75 labor assignment records**, covering all 15 workers for each of the same five working days used in the attendance demonstration.
+
+The records must have varied construction activities, work areas, supervisors, and assignment statuses.
+
+## 9. WORK ACTIVITY MASTER DATA
+
+Create a Work Activity Master Data module containing at least **10 unique construction activities**.
+
+### Required activity fields
+
+1. Activity ID.
+2. Activity Name.
+3. Description of Work.
+4. Unit of Measurement.
+5. Target Productivity Rate.
+6. Activity Status.
+
+### Examples of construction activities
+
+Use suitable sample activities such as:
+
+1. Excavation.
+2. Reinforcement Steel Installation.
+3. Formwork Installation.
+4. Concrete Pouring.
+5. Concrete Masonry Installation.
+6. Plastering.
+7. Electrical Conduit Installation.
+8. Plumbing Pipe Installation.
+9. Floor Tile Installation.
+10. Painting.
+
+Additional activities may be included.
+
+### Units of measurement
+
+Support appropriate units, including:
+
+- Square meters (m²).
+- Cubic meters (m³).
+- Linear meters (m).
+- Pieces.
+- Other configurable units when necessary.
+
+Each activity must have an appropriate unit and a target productivity rate expressed as output per labor-hour.
+
+### Required functionality
+
+- Add activities.
+- View activity details.
+- Edit activity descriptions, units, and productivity targets.
+- Activate or deactivate activities.
+- Search and filter the activity catalog.
+- Use existing activity records in labor assignments and accomplishment records.
+- Prevent inconsistent units between activity definitions and linked accomplishment records.
+
+Do not invent a universal productivity standard. Use clearly labeled illustrative targets for the demonstration dataset, and allow authorized users to update them according to project requirements.
+
+## 10. DAILY ACCOMPLISHMENT RECORDS
+
+Create a Daily Accomplishment module that tracks actual construction work completed by individual workers or work teams.
+
+### Required accomplishment fields
+
+1. Accomplishment ID.
+2. Date.
+3. Activity ID.
+4. Assigned Worker or Work Team.
+5. Work Area.
+6. Planned Quantity.
+7. Actual Accomplished Quantity.
+8. Unit of Measurement.
+9. Actual Labor Hours.
+10. Productivity Rate.
+11. Remarks.
+
+### Required functionality
+
+- Create accomplishment records for each working day.
+- Link accomplishment records to Work Activity Master Data.
+- Link the record to its relevant work area and assigned worker or work team.
+- Preferentially link participating workers through valid daily labor assignments.
+- Record planned quantities and actual accomplished quantities.
+- Record the actual labor hours attributable to the activity.
+- Automatically calculate productivity rates.
+- Compare actual performance against the planned quantity and target productivity.
+- Allow authorized editing of work quantities and remarks.
+- Validate quantities and labor hours.
+- Filter records by date, worker or team, activity, work area, and performance status.
+
+### Required calculations
+
+Actual Productivity Rate = Actual Accomplished Quantity ÷ Actual Labor Hours
+
+Productivity Achievement (%) = (Actual Productivity Rate ÷ Target Productivity Rate) × 100
+
+Planned Quantity Achievement (%) = (Actual Accomplished Quantity ÷ Planned Quantity) × 100
+
+The system must prevent division by zero and clearly identify missing or invalid data.
+
+Use the activity's unit of measurement consistently when calculating and presenting productivity.
+
+Flag an activity as **Below Target** when its actual productivity rate is less than its configured target productivity rate.
+
+If actual labor hours are zero or the required data are missing, display the result as unavailable instead of presenting a misleading productivity value.
+
+### Required coverage
+
+Create accomplishment records covering all five sample working days and the construction activities performed by the assigned workforce.
+
+Use realistic but clearly labeled sample quantities and labor hours. Include examples of activities performing above target, meeting target, and below target so the productivity dashboard can demonstrate each condition.
+
+## 11. LABOR MANAGEMENT DASHBOARD
+
+Build an interactive dashboard with six clearly organized sections.
+
+Include date filters, summary cards, appropriate tables, charts, and drill-down navigation to the underlying records.
+
+All dashboard values must be calculated from actual database records and the configured formulas. Do not hardcode dashboard figures.
+
+### A. Today's Workforce
+
+Display workforce statistics for the selected date:
+
+- Total number of workers scheduled.
+- Total workers present.
+- Total workers absent.
+- Total workers late.
+
+Use daily labor assignments to determine the scheduled workforce for the selected date.
+
+Use valid attendance records to calculate present, absent, and late totals. Clearly distinguish Half-Day attendance in detailed views and supplementary indicators.
+
+Clicking a summary card should open the relevant filtered attendance or assignment records.
+
+### B. Labor Hours
+
+Display:
+
+- Total labor-hours worked for the selected day.
+- Total overtime hours for the selected day.
+- Total labor-hours for the five-day demonstration period.
+
+Calculate labor-hours from valid attendance records.
+
+Avoid counting the same attendance record more than once. Exclude future or incomplete shifts from actual-hours totals.
+
+Provide a date-range selector so the user can inspect a specific working day or period.
+
+### C. Labor Cost
+
+Display:
+
+- Total Daily Labor Cost.
+- Month-to-Date (MTD) Labor Cost.
+- Labor Cost per Worker.
+- Labor Cost per Trade.
+- Regular hours, overtime hours, and their associated costs where useful.
+
+Use recorded attendance hours, worker wage rates, and configured overtime rates.
+
+For the configurable sample payroll model, calculate:
+
+Hourly Rate = Daily Wage Rate ÷ Standard Paid Hours per Day
+
+Regular Pay = Regular Hours Worked × Hourly Rate
+
+Overtime Pay = Overtime Hours × Hourly Rate × Configured Overtime Multiplier
+
+Labor Cost = Regular Pay + Overtime Pay
+
+Use configurable standard hours and overtime multipliers. Label demonstration values as sample assumptions and do not represent them as universal legal payroll rules.
+
+Apply the same cost rules consistently in the dashboard, reports, and detailed worker cost breakdowns.
+
+Do not calculate labor costs from unverified or duplicate attendance records.
+
+### D. Workforce by Trade
+
+Display the number of workers in each construction trade or specialization.
+
+Provide at least one of the following, preferably both:
+
+- Pie chart.
+- Bar chart.
+
+The visualization must use actual worker records and clearly identify the trade categories.
+
+Provide useful filtering and a way to inspect the workers represented by each category.
+
+### E. Manpower Status
+
+Display the workforce status, including:
+
+- Active workers.
+- Inactive workers.
+- Assigned workers.
+- Unassigned workers.
+- Present workers.
+- Absent workers.
+- Late workers.
+
+Use Worker Master Data for active and inactive status, Daily Labor Assignment for assigned and unassigned status on the selected date, and Attendance Management for attendance status.
+
+Avoid classifying workers as unassigned merely because the selected date has no assignments recorded; distinguish missing records from confirmed unassigned status where appropriate.
+
+### F. Productivity per Activity
+
+Provide a detailed productivity analysis for construction activities.
+
+Display:
+
+- Planned versus actual accomplishment.
+- Productivity rate per construction activity.
+- Actual productivity compared with target productivity.
+- Percentage achievement of planned quantity.
+- Percentage achievement of target productivity.
+- Activities performing below target.
+
+Use appropriate charts or comparison tables to make differences clear.
+
+Show a visually distinct but accessible Below Target indicator for underperforming activities.
+
+Allow the user to filter the productivity view by date, activity, work area, or supervisor where applicable.
+
+Clicking an activity should open its related accomplishment records and supporting assignment details.
+
+## 12. DATABASE STRUCTURE AND RELATIONSHIPS
+
+Build a normalized relational database with meaningful primary keys, foreign keys, indexes, constraints, and migration scripts.
+
+At minimum, implement the following tables or equivalent normalized database structures:
+
+### A. User Profiles
+
+Store the application user's ID, name, email, role, account status, and related account metadata.
+
+Associate profiles with the authentication provider's user IDs.
+
+### B. User Module Permissions
+
+Store per-user access permissions for each application module.
+
+Include view, create, edit, and delete flags, with protected administrator privileges.
+
+### C. Workers
+
+Store all required Worker Master Data.
+
+Use a unique Worker ID and enforce appropriate field validation.
+
+### D. Supervisors
+
+Store supervisor identifiers, names, and relevant details so labor assignments can reference valid supervisors.
+
+### E. Work Areas
+
+Store work area identifiers, names, and descriptions for construction locations.
+
+### F. Work Activities
+
+Store the required activity master fields, including unit of measurement, target productivity, description, and activity status.
+
+### G. Attendance
+
+Store attendance IDs, worker references, dates, time in, time out, status, calculated total hours, and overtime hours.
+
+Apply a suitable uniqueness constraint for a worker's attendance on a date unless a documented multi-shift design requires a different key.
+
+### H. Daily Labor Assignments
+
+Store assignment IDs, date, worker references, activity references, work area references, supervisor references, and assignment status.
+
+### I. Daily Accomplishments
+
+Store accomplishment IDs, dates, activity references, work area references, planned quantities, actual quantities, units, actual labor hours, calculated productivity, and remarks.
+
+### J. Accomplishment Participants
+
+Use a junction table or equivalent relationship to link an accomplishment to one or more relevant labor assignments or participating workers. This must support worker-team accomplishment records without duplicating the accomplishment itself.
+
+### K. System Settings
+
+Store authorized configuration values such as standard daily paid hours, normal shift start time, unpaid break rules, half-day threshold, overtime rules, and currency/display preferences.
+
+### L. Audit Logs
+
+Record significant application activities for accountability and troubleshooting.
+
+### Required relationships
+
+Implement valid relationships such as:
+
+- Workers → Attendance.
+- Workers → Daily Labor Assignments.
+- Work Activities → Daily Labor Assignments.
+- Work Areas → Daily Labor Assignments.
+- Supervisors → Daily Labor Assignments.
+- Work Activities → Daily Accomplishments.
+- Work Areas → Daily Accomplishments.
+- Daily Labor Assignments → Accomplishment Participants.
+- Daily Accomplishments → Accomplishment Participants.
+- Authenticated Users → User Profiles.
+- User Profiles → User Module Permissions.
+- Authenticated Users → Audit Logs.
+
+Enforce referential integrity so that linked records cannot reference nonexistent workers, activities, supervisors, or work areas.
+
+Protect historical records against accidental deletion. Prefer deactivation or archival for referenced master data, and require appropriate permission for corrections.
+
+Provide an Entity Relationship Diagram (ERD) or an equivalent database relationship visualization in the documentation section.
+
+## 13. AUDIT LOGGING AND ACCOUNTABILITY
+
+Implement an audit log as an additional system feature.
+
+Track important actions, including:
+
+- Successful logins and logouts where feasible.
+- Failed login attempts where supported by the authentication provider.
+- Creation of records.
+- Editing of records.
+- Deactivation of workers or users.
+- Deletion or archival of records.
+- Changes to user roles and module permissions.
+- Changes to wage rates and payroll configuration.
+- Changes to productivity targets and accomplishment quantities.
+
+Each audit entry should include:
+
+- Audit ID.
+- User ID.
+- Action.
+- Affected module.
+- Affected record identifier where applicable.
+- Timestamp.
+- Relevant change summary or before/after values where appropriate.
+
+Protect the audit log against unauthorized editing or deletion. Standard Users must not be able to alter their own audit history or privileged records.
+
+Record audit entries through trusted server-side operations wherever possible.
+
+## 14. FUNCTIONAL DATA ENTRY FORMS
+
+The PDF requires functional forms for major database records.
+
+Implement working forms for:
+
+- Worker Master Data.
+- Attendance Management.
+- Daily Labor Assignment.
+- Work Activity Master Data.
+- Daily Accomplishment Records.
+- User Management.
+- System Settings where authorized.
+
+Each form must have:
+
+- Appropriate field types.
+- Required-field indicators.
+- Input validation.
+- Helpful error messages.
+- Save and cancel controls.
+- Edit functionality when permitted.
+- Confirmation before destructive actions.
+- Loading and success states.
+- Correct database create/update behavior.
+
+Use dropdowns or searchable selectors for related entities rather than requiring users to manually type foreign-key identifiers.
+
+Refresh the relevant tables and dashboard values after successful changes.
+
+## 15. SEARCH, FILTERING, EXPORTS, AND REPORTING
+
+Provide useful reporting capabilities for everyday labor management.
+
+Support:
+
+- Date-based attendance reports.
+- Worker attendance history.
+- Daily labor assignment reports.
+- Work activity accomplishment reports.
+- Labor-hours summaries.
+- Overtime summaries.
+- Daily and month-to-date labor cost reports.
+- Labor cost by worker and trade.
+- Productivity performance reports.
+- Below-target activity reports.
+- Worker and employment-status reports.
+
+Allow appropriate filtering by date, worker, trade, activity, work area, supervisor, employment status, and assignment status.
+
+Provide CSV exports for structured records and report views where appropriate.
+
+Provide print-friendly reports and PDF export where supported.
+
+Ensure that exported totals agree with the values shown in the application. Exports must respect the user's permissions and selected filters.
+
+## 16. DEMONSTRATION DATA AND SEEDING
+
+Populate the configured database with a coherent demonstration dataset.
+
+The initial dataset must include:
+
+1. At least 15 construction workers representing different trades.
+2. At least 75 attendance records across five working days.
+3. At least 75 daily labor assignment records across the same five working days.
+4. At least 10 unique construction activities.
+5. Daily accomplishment records covering all five working days and the activities performed.
+6. Supervisors and work areas referenced by the assignments.
+7. An initial administrator and a standard User account, provisioned securely as described in the authentication requirements.
+
+Use a clear five-working-day sample period for the demonstration. Keep it configurable and consistent across attendance, assignment, and accomplishment data.
+
+All required record counts must be verified against the persisted database, not just displayed as sample statistics.
+
+Mark sample data as demonstration data so it can be distinguished from real project records.
+
+Create an idempotent seeding procedure: running it again must not create duplicate workers, attendance records, assignments, activities, or accomplishment records.
+
+Use realistic sample data to demonstrate the full workflow, including:
+
+- Different attendance statuses.
+- Regular and overtime hours.
+- Different worker trades.
+- Different construction activities.
+- Completed and in-progress assignments.
+- Planned and actual quantities.
+- Productivity above, at, and below target.
+
+Do not generate inconsistent references, mismatched units, duplicate daily attendance records, or payroll figures that contradict the stored wage rates and time records.
+
+## 17. DOCUMENTATION AND SUBMISSION MODULE
+
+The academic project requires a written report describing the Labor Management System, including screenshots and a working database system access link.
+
+Create a **Documentation & Submission** section that helps prepare the required report.
+
+The report must contain the following sections:
+
+### A. Project Overview
+
+Briefly explain the Labor Management System, its objectives, and its purpose in construction workforce management.
+
+### B. Database Features
+
+Explain worker management, attendance tracking, daily labor assignments, work activity management, accomplishment monitoring, labor cost computations, and productivity analysis.
+
+### C. Database Structure
+
+Present the database tables, primary keys, foreign keys, important relationships, and Entity Relationship Diagram.
+
+### D. Dashboard Features
+
+Explain the dashboard indicators, charts, filters, and automated calculations. Describe how workforce statistics, labor-hours totals, labor costs, trade distribution, manpower status, and productivity comparisons are determined.
+
+### E. Screenshots
+
+Include or provide clearly labeled spaces for screenshots of:
+
+- Login page.
+- Admin Dashboard.
+- User Dashboard.
+- Worker Master Data table and form.
+- Attendance Management table and form.
+- Daily Labor Assignment table and form.
+- Work Activity Master Data table and form.
+- Daily Accomplishment table and form.
+- Labor Management Dashboard and its charts.
+- User Management / Control Panel.
+- Database relationships or ERD.
+- Other important system features.
+
+Use genuine screenshots of the implemented application where available. Do not fabricate screenshots of features that have not been built.
+
+If screenshots must be captured manually, provide a checklist explaining which application screens should be captured.
+
+### F. System Functionality
+
+Explain how the modules work together, how records reference each other, how calculations are performed, and how changes to source records affect reports and dashboard values.
+
+### G. Database Access Link
+
+Provide a clearly labeled field or section for the actual deployed application's access URL.
+
+Do not invent a deployment URL. After deployment, display the actual URL supplied by the hosting platform and provide instructions for authorized access.
+
+### H. Suggested Advancements
+
+Discuss realistic future improvements such as timesheet approval, payroll integration, mobile attendance entry, QR-code worker identification, equipment-labor coordination, and enhanced productivity forecasting.
+
+Clearly distinguish implemented features from proposed future advancements.
+
+### Documentation export
+
+Provide a print-friendly report page with an option to export or print the documentation as PDF where supported.
+
+Include an ERD, formula explanations, feature descriptions, and spaces for genuine screenshots. Make it easy to update the project overview and database access link before submission.
+
+## 18. USER EXPERIENCE AND ACCESSIBILITY
+
+The system must be understandable to a user who is not a software developer.
+
+Provide:
+
+- Clear navigation labels.
+- Consistent table and form layouts.
+- Helpful field descriptions.
+- Status badges with readable text, not color alone.
+- Search and filter controls appropriate to each module.
+- Confirmation messages after important actions.
+- Useful empty states.
+- Friendly validation messages.
+- Responsive page layouts.
+- Accessible color contrast and keyboard-friendly controls.
+
+The system must avoid dead links, nonfunctional menu items, placeholder buttons, and forms that do not save data.
+
+Provide clear separation between administrative functions and normal workforce operations.
+
+## 19. DATABASE SECURITY AND DATA VALIDATION
+
+Enforce security and data integrity throughout the application.
+
+At minimum:
+
+- Authenticate protected routes.
+- Validate permissions on the server and database layer.
+- Apply appropriate database row-level security policies.
+- Restrict user-role and permission updates to authorized administrators.
+- Prevent users from accessing modules they are not allowed to view.
+- Validate foreign-key relationships and numeric calculations.
+- Prevent duplicate primary identifiers and prohibited duplicate records.
+- Sanitize and validate user-provided inputs.
+- Keep credentials and privileged keys out of client-side code.
+- Protect audit records from unauthorized modification.
+- Handle expired sessions and unauthorized requests safely.
+- Avoid displaying sensitive information to unauthorized users.
+
+Never rely on frontend-only role checks as the security mechanism.
+
+## 20. AUTOMATED TESTING AND ACCEPTANCE CHECKLIST
+
+Before declaring the application complete, test the implementation against the following checklist.
+
+### Authentication and access
+
+- The login page works.
+- An Admin account can sign in.
+- A standard User account can sign in.
+- Invalid credentials are rejected.
+- Sign-out works.
+- Unauthorized users cannot access protected pages.
+- An Admin can create and manage user accounts through the Control Panel.
+- Module-level view-only permissions are enforced.
+- A User cannot grant themselves administrator privileges.
+- Database-level access restrictions are tested.
+
+### Database minimums
+
+- At least 15 valid worker records exist.
+- At least 75 attendance records exist for the five sample working days.
+- At least 75 labor assignment records exist for the same five days.
+- At least 10 distinct work activities exist.
+- Accomplishment records cover all five working days.
+- Database relationships are valid.
+- Functional forms save and retrieve persisted records.
+
+### Calculation accuracy
+
+Test and verify:
+
+- Total hours worked after applicable unpaid breaks.
+- Overtime hour calculations.
+- Daily labor cost.
+- Month-to-date labor cost.
+- Labor cost per worker and trade.
+- Total labor-hours for a selected date and five-day period.
+- Planned quantity achievement.
+- Actual productivity per labor-hour.
+- Actual productivity compared with the target.
+- Below-target activity identification.
+
+Use test records with known inputs and expected results. Fix discrepancies instead of merely displaying calculated figures without verification.
+
+### Dashboard accuracy
+
+- All six dashboard sections are present.
+- Dashboard totals respond to date and relevant filters.
+- Workforce-by-trade charts use actual worker records.
+- Manpower status agrees with master data and assignments.
+- Productivity comparisons agree with accomplishment records.
+- Clicking dashboard items opens the appropriate filtered details.
+
+### General functionality
+
+- Add, view, edit, and authorized delete or archival actions work.
+- Search, sorting, pagination, and filters work.
+- Invalid inputs are handled correctly.
+- Foreign-key references remain valid.
+- Exports agree with the displayed data.
+- The documentation section is usable.
+- There are no unresolved build errors or critical console errors.
+
+Do not claim a test passed unless it has actually been executed and its result verified.
+
+## 21. ADDITIONAL FEATURES FOR A MORE COMPLETE SYSTEM
+
+Implement the following additional features where practical without compromising the required functionality:
+
+- Audit logs.
+- Notification messages after successful or failed operations.
+- Dashboard drill-down to supporting records.
+- Exportable labor reports.
+- Configurable work-hour and overtime rules.
+- A database relationship visualization.
+- A documentation and submission section.
+- Demo-data initialization and verification tools.
+- Useful suggested advancements in the project report.
+
+Prioritize correctness and completeness before optional enhancements.
+
+## 22. IMPLEMENTATION INSTRUCTIONS
+
+Build the application in a structured, maintainable manner.
+
+1. Inspect the current project files and identify the available application structure.
+2. Design the relational database schema and relationships.
+3. Implement authentication and role-based permissions.
+4. Create the application navigation and protected routes.
+5. Implement Worker Master Data.
+6. Implement Attendance Management and automatic hour calculations.
+7. Implement Daily Labor Assignment.
+8. Implement Work Activity Master Data.
+9. Implement Daily Accomplishment Records and productivity calculations.
+10. Build all six dashboard sections.
+11. Implement the Admin User Management / Control Panel.
+12. Add module-level permissions and audit logging.
+13. Implement reports, exports, and documentation.
+14. Create the demonstration dataset and verify the required record counts.
+15. Run the acceptance tests, fix errors, and verify the calculations.
+16. Provide the database configuration and deployment instructions.
+
+Do not remove a required module to simplify the implementation. Do not replace an incomplete feature with a static image or hardcoded demonstration value.
+
+If part of the implementation cannot be completed because an external service has not been configured, identify the exact blocker and supply the required setup steps. Continue implementing the parts that can be completed.
+
+## 23. REQUIRED FINAL RESULT
+
+The final deliverable must be a usable Construction Labor Management System with:
+
+- A functional login page.
+- Admin and User accounts configured through a secure process.
+- An administrator User Management / Control Panel.
+- Module-level access permissions.
+- Worker Master Data with at least 15 workers.
+- Attendance Management with at least 75 records for five working days.
+- Daily Labor Assignment with at least 75 records for the same five working days.
+- Work Activity Master Data with at least 10 activities.
+- Daily Accomplishment records covering all five working days.
+- All six required Labor Management Dashboard sections.
+- Automated attendance, labor-cost, and productivity calculations.
+- Properly linked relational database tables.
+- Functional data entry forms.
+- Search, filtering, and reporting.
+- An audit log.
+- A documentation and submission section.
+- Verified calculations, validated data relationships, and setup/deployment instructions.
+
+After implementation, provide a concise completion report listing:
+
+1. Features implemented.
+2. Database tables and relationships created.
+3. Required sample record counts verified.
+4. Authentication and permission configuration completed.
+5. Tests executed and their actual results.
+6. Remaining configuration steps, if any.
+7. How to provision administrator and standard-user accounts securely.
+8. How to run and deploy the application.
+9. The actual application access URL, once deployment has produced one.
+
+**Final instruction:** Build a complete, functional, secure, and user-friendly Labor Management System that follows every mandatory requirement in the project instructions. Validate data integrity and calculations before declaring the project complete. Do not claim that deployment, account creation, database connectivity, or testing has succeeded unless it has actually been verified.
